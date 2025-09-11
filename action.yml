@@ -1,17 +1,26 @@
-name: Action Name
-description: Action description
+name: "Commit files"
+description: "Commit files to the repository"
 inputs:
-  input-parameter:
-    description: Description of input parameter
+  files:
+    description: "List of filenames with path to the files to commit, separated by a comma"
+    required: true
+  commitMessage:
+    description: "Commit message"
+    default: "Commit from bot"
+    required: true
+  token:
+    description: "GitHub token"
     required: true
 runs:
   using: "composite"
   steps:
-    
-    - name: Authenticate org
-      run: |
-        echo "Hello World!"
-        echo "Input Parameter: $INPUT_PARAMETER"
+    - name: Commit
       shell: bash
+      run: |
+        bash "$GITHUB_ACTION_PATH/scripts/commit.sh"
       env:
-        INPUT_PARAMETER: ${{ inputs.input-parameter }}
+        REPOSITORY: "${{ github.repository }}"
+        REF_NAME: "${{ github.ref_name }}"
+        FILES: "${{ inputs.files }}"
+        COMMIT_MESSAGE: "${{ inputs.commitMessage }}"
+        GH_AUTH_TOKEN: "${{ inputs.token }}"

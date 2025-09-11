@@ -1,17 +1,25 @@
-# <Navn på action>
+# Commit files
 
-<Beskrivelse av action>
+This action allows you to commit files to a GitHub repository.
 
 ## Usage
 
 <!-- Start usage -->
 ```yaml
-- uses: navikt/<reponame>@<tag/sha>
+- uses: navikt/sf-gha-commit-files@<tag/sha>
     with:
-        # Description of input parameter
-        # Required: true/false
-        # Default: ''
-        input-parameter: ''
+        # List of filenames with path to the files to commit, separated by a comma
+        # Required: true
+        files: ''
+        
+        # Commit message
+        # Default: "Commit from bot"
+        # Required: true
+        commitMessage: ''
+        
+        # GitHub token
+        # Required: true'
+        token: ''
 ```
 <!-- end usage -->
 
